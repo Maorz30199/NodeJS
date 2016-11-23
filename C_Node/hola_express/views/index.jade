@@ -1,0 +1,16 @@
+html
+  head
+    title pagina con express
+  body
+    - var arreglo = [1,2,3,4,5];
+    //- for (var i = arreglo.length - 1; i >= 0; i--) 
+      //p hola #{arreglo[i]}
+    each item in arreglo
+      p= item
+      case item
+        when 1
+          p El item era uno
+        when 2
+          p El item era 2
+        default 
+          p item es número mayor
