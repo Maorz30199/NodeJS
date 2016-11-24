@@ -1,7 +1,22 @@
 var express = require("express");
-
+var bodyParser = require("body-parser");
 var app = express();
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
+mongoose.connect("mongodb://localhost/fotos");
+
+var userSchemaJSON = {
+  email:String,
+  password:String
+};
+
+var user_schema = new Schema(userSchemaJSON);
+var User = mongoose.model("User",user_schema);
+
+app.use("/public",express.static('public'));
+app.use(bodyParser.json()); // para peticiones aplication/json
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","jade");
 
 app.get("/",function(req,res){
@@ -9,7 +24,22 @@ app.get("/",function(req,res){
 });
 
 app.get("/login",function(req,res){
-  res.render("login");
+  User.find(function(err,doc){
+      console.log(doc);
+      res.render("login");
+  });
+
+});
+
+app.post("/users",function(req,res){
+  var user = new User({email: req.body.email, password: req.body.password});
+  console.log("Contraseña: " + req.body.password);
+  console.log("email: " + req.body.email);
+
+  user.save(function(){
+      res.send("Guardamos tus datos");
+  });
+
 });
 
 app.listen(8080);
