@@ -1,0 +1,16 @@
+{
+  "name": "apirest",
+  "version": "1.0.0",
+  "description": "api rest utilizando nodejs, mongoose, angularjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Maorz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.0",
+    "mongoose": "^4.8.5"
+  }
+}
